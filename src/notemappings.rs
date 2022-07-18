@@ -167,24 +167,24 @@ impl NoteMapping {
             v.push(Event::NoteMod(None));
         }
 
-        v.push(Event::KeyDown(KbdKey::Layout(key)));
+        if key == 'S' {
+            v.push(Event::KeyDown(KbdKey::Space));
+        } else {
+            v.push(Event::KeyDown(KbdKey::Layout(key)));
+        }
 
         v
     }
 
     pub fn up_event(key: char, _modifier: Option<KbdKey>, _delay: Option<u64>) -> Vec<Event> {
-        /*
         let mut v = vec![];
-                if let Some(ref m) = modifier {
-                    v.push(Event::KeyUp(m.clone()));
-                }
 
-                if let Some(d) = delay {
-                    v.push(Event::Delay(d));
-                }
-                v.push(Event::KeyUp(KbdKey::Layout(key)));
-        */
-        vec![Event::KeyUp(KbdKey::Layout(key))]
+        if key == 'S' {
+            v.push(Event::KeyUp(KbdKey::Space));
+        } else {
+            v.push(Event::KeyUp(KbdKey::Layout(key)));
+        }
+        v
     }
 }
 
@@ -222,7 +222,7 @@ impl NoteMappings {
         for line in buf_reader.lines() {
             let l = line.unwrap();
             let fields: Vec<&str> = l.split(' ').collect();
-            if fields.len() != 4 {
+            if fields.len() < 4 {
                 println!("Line is not 4 elements!");
                 continue;
             }

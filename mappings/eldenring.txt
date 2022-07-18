@@ -1,0 +1,7 @@
+E2 0 w w // forward
+F2 0 a a // left
+G2 0 s s // back
+A2 0 d d // right
+E3 0 Space Space // dodge
+D3 0 f f // jump
+E4 0 q q // lock on
