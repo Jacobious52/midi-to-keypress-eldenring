@@ -9,6 +9,8 @@ license = "Apache-2.0"
 clap = "2.33.1"
 midir = "0.7.0"
 enigo = "0.0.14"
+ron = "0.7"
+serde = { version = "1", features = ["derive"] }
 
 [features]
 

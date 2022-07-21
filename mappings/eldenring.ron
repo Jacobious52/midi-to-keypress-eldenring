@@ -1,0 +1,141 @@
+(
+    mappings: [
+        // forward
+        (
+            note: E2,
+            channel: 0,
+            on: [
+                KeyDown(Layout('w')),
+                KeyUp(Layout('s')),
+                KeyUp(Layout('a')),
+                KeyUp(Layout('d'))
+            ],
+            off: [],
+        ),
+        // back
+        (
+            note: A2,
+            channel: 0,
+            on: [
+                KeyDown(Layout('s')),
+                KeyUp(Layout('w')),
+                KeyUp(Layout('a')),
+                KeyUp(Layout('d'))
+            ],
+            off: [],
+        ),
+        // left
+        (
+            note: F2,
+            channel: 0,
+            on: [
+                KeyDown(Layout('a')),
+                KeyUp(Layout('s')),
+                KeyUp(Layout('w')),
+                KeyUp(Layout('d'))
+            ],
+            off: [],
+        ),
+        // right
+        (
+            note: G2,
+            channel: 0,
+            on: [
+                KeyDown(Layout('d')),
+                KeyUp(Layout('s')),
+                KeyUp(Layout('a')),
+                KeyUp(Layout('w'))
+            ],
+            off: [],
+        ),
+        // stop
+        (
+            note: E4,
+            channel: 0,
+            on: [
+                KeyUp(Layout('d')),
+                KeyUp(Layout('s')),
+                KeyUp(Layout('a')),
+                KeyUp(Layout('w'))
+            ],
+            off: [],
+        ),
+        // dodge
+        (
+            note: C3,
+            channel: 0,
+            on: [
+                KeyDown(Space),
+            ],
+            off: [
+                KeyUp(Space),
+            ],
+        ),
+        // jump
+        (
+            note: As2,
+            channel: 0,
+            on: [
+                KeyDown(Layout('f')),
+            ],
+            off: [
+                KeyUp(Layout('f')),
+            ],
+        ),
+        // lock on
+        (
+            note: D3,
+            channel: 0,
+            on: [
+                KeyDown(Layout('q')),
+            ],
+            off: [
+                KeyUp(Layout('q')),
+            ],
+        ),
+        // right hand
+        (
+            note: E3,
+            channel: 0,
+            on: [
+                KeyDown(Layout('o')),
+            ],
+            off: [
+                KeyUp(Layout('o')),
+            ],
+        ),
+        // left hand
+        (
+            note: F3,
+            channel: 0,
+            on: [
+                KeyDown(Layout('p')),
+            ],
+            off: [
+                KeyUp(Layout('p')),
+            ],
+        ),
+        // use
+        (
+            note: A3,
+            channel: 0,
+            on: [
+                KeyDown(Layout('r')),
+            ],
+            off: [
+                KeyUp(Layout('r')),zc
+            ],
+        ),
+        // event
+        (
+            note: As3,
+            channel: 0,
+            on: [
+                KeyDown(Layout('e')),
+            ],
+            off: [
+                KeyUp(Layout('e')),
+            ],
+        ),
+    ]
+)

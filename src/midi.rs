@@ -1,10 +1,12 @@
+use serde::Deserialize;
+
 #[derive(Debug, PartialEq)]
 pub enum MidiEvent {
     NoteOn,
     NoteOff,
 }
 
-#[derive(Debug, PartialOrd, PartialEq, Copy, Clone)]
+#[derive(Debug, PartialOrd, PartialEq, Copy, Clone, Deserialize)]
 #[allow(dead_code)]
 pub enum MidiNote {
     Cn = 0,

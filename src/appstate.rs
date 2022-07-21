@@ -6,7 +6,7 @@ use enigo::{Enigo, KeyboardControllable};
 
 thread_local!(static ENIGO: RefCell<Enigo> = RefCell::new(Default::default()));
 
-use crate::notemappings::{KbdKey, NoteMappings};
+use crate::notemappings::{Event, KbdKey, NoteMappings};
 
 #[derive(Default)]
 pub struct KeyGen {
@@ -64,6 +64,7 @@ impl KeyGen {
 pub struct AppState {
     keygen: Arc<Mutex<KeyGen>>,
     mappings: Arc<Mutex<NoteMappings>>,
+    last_key: Arc<Mutex<Event>>,
 }
 
 impl AppState {
@@ -77,5 +78,9 @@ impl AppState {
 
     pub fn mappings(&self) -> &Arc<Mutex<NoteMappings>> {
         &self.mappings
+    }
+
+    pub fn last_key(&self) -> &Arc<Mutex<Event>> {
+        &self.last_key
     }
 }

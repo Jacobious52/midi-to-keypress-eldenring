@@ -72,6 +72,7 @@ fn main() {
 /// This function is called for every message that gets passed in.
 fn midi_callback(_timestamp_us: u64, raw_message: &[u8], app_state: &AppState) {
     let mut keygen = app_state.keygen().lock().unwrap();
+    let mut last_event = app_state.last_key().lock().unwrap();
 
     if let Ok(msg) = MidiMessage::new(raw_message) {
         match app_state
@@ -86,7 +87,12 @@ fn midi_callback(_timestamp_us: u64, raw_message: &[u8], app_state: &AppState) {
                     MidiEvent::NoteOff => &note_mapping.off,
                 };
 
-                //println!("Found note mapping: {:?} for event {:?}, running sequence {:?}", note_mapping, msg.event(), sequence);
+                println!(
+                    "Found note mapping: {:?} for event {:?}, running sequence {:?}",
+                    note_mapping,
+                    msg.event(),
+                    sequence
+                );
                 for event in sequence {
                     match *event {
                         notemappings::Event::Delay(msecs) => {
@@ -128,6 +134,7 @@ fn midi_callback(_timestamp_us: u64, raw_message: &[u8], app_state: &AppState) {
                             }
                         }
                     }
+                    *last_event = event.clone();
                 }
             }
             _ => {
@@ -230,7 +237,7 @@ fn run(midi_name: Option<&str>, mappings_file: Option<&str>) -> Result<(), Box<d
             .mappings()
             .lock()
             .unwrap()
-            .import(filename)
+            .import_ron(filename)
             .unwrap(),
         None => generate_old_mappings(&mut app_state.mappings().lock().unwrap()),
     };

@@ -1,10 +1,11 @@
 use crate::midi::MidiNote;
 use enigo::Key;
-use std::fs::File;
+use serde::Deserialize;
+use std::fs::{self, File};
 use std::io::{BufRead, BufReader, Result};
 
 /// Proxy for Enigo::Key, since that variant isn't cloneable
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, Deserialize)]
 #[allow(dead_code)]
 pub enum KbdKey {
     /// return key
@@ -112,7 +113,7 @@ impl KbdKey {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize)]
 pub enum Event {
     /// Insert a Delay for a specified number of ms
     Delay(u64),
@@ -129,7 +130,13 @@ pub enum Event {
     NoteMod(Option<KbdKey>),
 }
 
-#[derive(Clone, Debug)]
+impl Default for Event {
+    fn default() -> Self {
+        Event::Delay(0)
+    }
+}
+
+#[derive(Clone, Debug, Deserialize)]
 pub struct NoteMapping {
     /// The source note that triggered this event.
     note: MidiNote,
@@ -188,7 +195,7 @@ impl NoteMapping {
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Deserialize)]
 pub struct NoteMappings {
     mappings: Vec<NoteMapping>,
 }
@@ -214,6 +221,12 @@ impl NoteMappings {
             }
         }
         None
+    }
+
+    pub fn import_ron(&mut self, filename: &str) -> Result<()> {
+        *self = ron::from_str(&fs::read_to_string(filename)?).unwrap();
+
+        Ok(())
     }
 
     pub fn import(&mut self, filename: &str) -> Result<()> {
